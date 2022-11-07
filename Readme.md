@@ -5,7 +5,7 @@ Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
 ## Usage
 
-Docker image is available at [Docker](https://hub.docker.com/r/pay2630/chulassomock)
+Docker image is available at [Docker](https://github.com/remove158/chula-sso/pkgs/container/chula-sso)
 
 1. Install docker
 2. Download the image: `docker pull ghcr.io/remove158/chula-sso:latest`
