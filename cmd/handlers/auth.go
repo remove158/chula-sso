@@ -36,7 +36,6 @@ func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	_ = h.authService.GetLogin(request.Service)
 
 	ctx.HTML(http.StatusOK, "index.html", gin.H{
 		"service": request.Service,
@@ -49,9 +48,28 @@ func (h *AuthHandler) PostLogin(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Printf("request: %v\n", request)
-	_ = h.authService.PostLogin("id")
-	ctx.Redirect(http.StatusTemporaryRedirect, generatePath(request.Service, request.UID))
+	user := generateUserResponse(request)
+	ticket := h.authService.PostLogin(user)
+	ctx.Redirect(http.StatusTemporaryRedirect, generatePath(request.Service, ticket))
+}
+
+func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
+	username := fmt.Sprintf("%s-%s", request.FirstName, request.LastName)
+	email := fmt.Sprintf("%s@student.chula.ac.th", request.UID)
+
+	return models.UserResponse{
+		UID:         request.UID,
+		Username:    username,
+		GECOS:       username,
+		Disable:     false,
+		Roles:       []string{},
+		FirstName:   request.FirstName,
+		FirstNameTH: request.FirstName,
+		LastName:    request.LastName,
+		LastNameTH:  request.LastName,
+		OUID:        request.UID,
+		Email:       email,
+	}
 }
 
 func generatePath(service string, ticket string) string {
