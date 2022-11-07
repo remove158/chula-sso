@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -31,7 +32,7 @@ func NewAuthHandler(authService services.IAuthService) *AuthHandler {
 func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 	var request models.GetLoginRequest
 
-	if err := ctx.BindQuery(&request); err != nil {
+	if err := ctx.ShouldBind(&request); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -43,11 +44,18 @@ func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 }
 
 func (h *AuthHandler) PostLogin(ctx *gin.Context) {
-	uid := "id"
-	response := h.authService.PostLogin(uid)
-	ctx.JSON(200, gin.H{
-		"message": response,
-	})
+	var request models.PostLoginRequest
+	if err := ctx.ShouldBind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	fmt.Printf("request: %v\n", request)
+	_ = h.authService.PostLogin("id")
+	ctx.Redirect(http.StatusTemporaryRedirect, generatePath(request.Service, request.UID))
+}
+
+func generatePath(service string, ticket string) string {
+	return fmt.Sprintf("%s?ticket=%s", service, ticket)
 }
 
 func (h *AuthHandler) ServiceValidation(ctx *gin.Context) {
