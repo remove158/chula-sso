@@ -1,0 +1,6 @@
+run :
+	go run ./cmd/main.go
+gen :
+	go generate ./...
+test:
+	go test -v ./...
