@@ -12,8 +12,11 @@ DEE_APP_ID=
 PORT=
 ```
 > DeeAppSecret (default="test") </br>
-> DeeAppId (default="test")
+> DeeAppId (default="test") </br>
+> PORT (default="8080") 
 
+## Preview
+![img](./preview-1.png)
 ## Endpoint
 - GET: /login?service={your-service-here}
 ```
