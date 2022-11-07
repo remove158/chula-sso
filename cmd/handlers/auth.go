@@ -82,7 +82,7 @@ func (h *AuthHandler) ServiceValidation(ctx *gin.Context) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	response, err := h.authService.ServiceValidation(request.Ticket)
+	response, err := h.authService.ServiceValidation(request)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return

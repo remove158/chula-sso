@@ -1,10 +1,23 @@
 # Chula SSO [mock]
+A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php)
+
+Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
+
+A chula sso [wiki](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work) is available.
+## Setup
+- create `.env` follow this template
+```
+DEE_APP_SECRET=
+DEE_APP_ID=
+```
+> DeeAppSecret (default="test") </br>
+> DeeAppId (default="test")
+
 ## Endpoint
 - GET: /login?service={your-service-here}
 ```
-Example 
-
 GET: /login?service=https://www.google.com
+
 Response: 
 (on-success) 301 Redirect to https://www.google.com?ticket=86966dc5-2049-428f-88fe-2d78a5985d38
 ```
@@ -20,8 +33,8 @@ Header : {
 }
 
 Response: 
-
-{ // (on-success) 200
+(on-success) 200
+{ 
 	"uid": "string",
 	"username": "string",
 	"gecos": "string",
