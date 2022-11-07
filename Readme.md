@@ -4,6 +4,8 @@ A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/
 Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
 A chula sso [wiki](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work) is available.
+
+You can clone this project
 ## Preview
 ![img](./preview-1.png)
 ## Setup
