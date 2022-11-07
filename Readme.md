@@ -20,8 +20,8 @@ The configuration is done by the following environment variables. (see [`docker 
 
 | Name  | Environment Variable | Default |
 |-------|----------------------|---------|
-| DeeAppId | APPID             | test   |
-| DeeAppSecret | APPSECRET     | test |
+| DeeAppId | DEE_APP_SECRET             | test   |
+| DeeAppSecret | DEE_APP_ID     | test |
 |Port   | PORT                 | 8080    |
 
 ## Endpoint
