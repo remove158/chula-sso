@@ -87,5 +87,5 @@ func (h *AuthHandler) ServiceValidation(ctx *gin.Context) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(200, response)
+	ctx.JSON(http.StatusOK, response)
 }
