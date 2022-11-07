@@ -4,9 +4,47 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.tailwindcss.com"></script>
 	<title>Document</title>
 </head>
 <body>
-	redirect target : {{ .service }}
+	<section class="bg-gray-50 dark:bg-gray-900 h-screen">
+		<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+			<div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+				<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+					<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+						Chula SSO Mock
+					</h1>
+					<form class="space-y-4 md:space-y-6" method="post" action="/login?service={{.service}}">
+						<div>
+							<label for="uid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UID</label>
+							<input type="text" name="uid" value="6200000001" id="uid" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+						</div>
+						<div class="flex flex-wrap">
+							<div class="w-1/2">
+								<label for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FName</label>
+								<input type="text" name="fname" id="fname"  value="prayuth" placeholder="FIRST NAME" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+							</div>
+							<div class="w-1/2">
+								<label for="lname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LName</label>
+								<input type="text" name="lname" id="lname" value="jun-aungkarn" placeholder="LAST NAME" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+							</div>
+						</div>
+						<div>
+							<label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
+							<select id="roles" name="roles" value="student" class="block appearance-none w-full  border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+								<option value="student">student</option>
+								<option value="faculty">faculty</option>
+							 </select>
+						</div>
+						<button type="submit" class="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Create an account</button>
+					</form>
+				</div>
+			</div>
+			<a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white my-4">
+				Service: {{.service}}    
+			</a>
+		</div>
+	  </section>
 </body>
 </html>

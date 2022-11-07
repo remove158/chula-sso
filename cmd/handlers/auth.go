@@ -30,12 +30,13 @@ func NewAuthHandler(authService services.IAuthService) *AuthHandler {
 
 func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 	var request models.GetLoginRequest
-	err := ctx.BindQuery(&request)
-	if err != nil {
+
+	if err := ctx.BindQuery(&request); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	_ = h.authService.GetLogin(request.Service)
+
 	ctx.HTML(http.StatusOK, "index.html", gin.H{
 		"service": request.Service,
 	})
