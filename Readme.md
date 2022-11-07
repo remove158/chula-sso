@@ -1,9 +1,11 @@
-# Chula SSO [mock]
+## Chula SSO
 A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php)
 
 Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
 A chula sso [wiki](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work) is available.
+## Preview
+![img](./preview-1.png)
 ## Setup
 - create `.env` follow this template
 ```
@@ -15,8 +17,6 @@ PORT=
 > DeeAppId (default="test") </br>
 > PORT (default="8080") 
 
-## Preview
-![img](./preview-1.png)
 ## Endpoint
 - GET: /login?service={your-service-here}
 ```
