@@ -8,6 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	models "github.com/remove158/chula-sso/cmd/models"
 )
 
 // MockIAuthService is a mock of IAuthService interface.
@@ -33,32 +34,18 @@ func (m *MockIAuthService) EXPECT() *MockIAuthServiceMockRecorder {
 	return m.recorder
 }
 
-// GetLogin mocks base method.
-func (m *MockIAuthService) GetLogin(service string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetLogin", service)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// GetLogin indicates an expected call of GetLogin.
-func (mr *MockIAuthServiceMockRecorder) GetLogin(service interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLogin", reflect.TypeOf((*MockIAuthService)(nil).GetLogin), service)
-}
-
 // PostLogin mocks base method.
-func (m *MockIAuthService) PostLogin(uid string) string {
+func (m *MockIAuthService) PostLogin(user models.UserResponse) string {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PostLogin", uid)
+	ret := m.ctrl.Call(m, "PostLogin", user)
 	ret0, _ := ret[0].(string)
 	return ret0
 }
 
 // PostLogin indicates an expected call of PostLogin.
-func (mr *MockIAuthServiceMockRecorder) PostLogin(uid interface{}) *gomock.Call {
+func (mr *MockIAuthServiceMockRecorder) PostLogin(user interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostLogin", reflect.TypeOf((*MockIAuthService)(nil).PostLogin), uid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostLogin", reflect.TypeOf((*MockIAuthService)(nil).PostLogin), user)
 }
 
 // ServiceValidation mocks base method.

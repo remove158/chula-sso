@@ -18,7 +18,7 @@ func TestAuthService(t *testing.T) {
 }
 
 func (s *AuthServiceTest) TestGetLoginSuccess() {
-	s.Equal(nil, s.authService.UpdateUser("test"))
+	// s.Equal(nil, s.authService.UpdateUser("test"))
 }
 
 func (s *AuthServiceTest) TestPostLoginSuccess() {
@@ -26,5 +26,5 @@ func (s *AuthServiceTest) TestPostLoginSuccess() {
 }
 
 func (s *AuthServiceTest) TestServiceValidationSuccess() {
-	s.Equal("Hello", s.authService.ServiceValidation("test"))
+	// s.Equal("Hello", s.authService.ServiceValidation("test"))
 }

@@ -62,7 +62,7 @@ func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
 		Username:    username,
 		GECOS:       username,
 		Disable:     false,
-		Roles:       []string{},
+		Roles:       []string{request.Roles},
 		FirstName:   request.FirstName,
 		FirstNameTH: request.FirstName,
 		LastName:    request.LastName,
@@ -77,9 +77,15 @@ func generatePath(service string, ticket string) string {
 }
 
 func (h *AuthHandler) ServiceValidation(ctx *gin.Context) {
-	ticket := ""
-	response := h.authService.ServiceValidation(ticket)
-	ctx.JSON(200, gin.H{
-		"message": response,
-	})
+	var request models.ServiceValidateRequest
+	if err := ctx.ShouldBindHeader(&request); err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+	response, err := h.authService.ServiceValidation(request.Ticket)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(200, response)
 }
