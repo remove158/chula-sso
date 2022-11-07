@@ -62,5 +62,3 @@ Response:
 (on-fail) 401
 
 ```
-## Diagram 
-![chula-sso](https://account.it.chula.ac.th/wiki/lib/plugins/plantuml/img.php?width=0&height=0&title=PlantUML%20Graph&align=&version=2011-07-16&md5=f8f62ed0420593df3f158216f286b820)
