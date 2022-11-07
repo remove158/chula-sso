@@ -1,23 +1,28 @@
 ## Chula SSO
-A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php)
+A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work)
 
 Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
-A chula sso [wiki](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work) is available.
+## Usage
 
-You can clone this project
+Docker image is available at [Docker](https://hub.docker.com/r/pay2630/chulassomock)
+
+1. Install docker
+2. Download the image: `docker pull ghcr.io/remove158/chula-sso:latest`
+3. Run: `docker run -p 8080:8080 ghcr.io/remove158/chula-sso:latest`
+
 ## Preview
 ![img](./preview-1.png)
-## Setup
-- create `.env` follow this template
-```
-DEE_APP_SECRET=
-DEE_APP_ID=
-PORT=
-```
-> DeeAppSecret (default="test") </br>
-> DeeAppId (default="test") </br>
-> PORT (default="8080") 
+
+## Configuration
+
+The configuration is done by the following environment variables. (see [`docker run`](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file) on how to set it)
+
+| Name  | Environment Variable | Default |
+|-------|----------------------|---------|
+| DeeAppId | APPID             | test   |
+| DeeAppSecret | APPSECRET     | test |
+|Port   | PORT                 | 8080    |
 
 ## Endpoint
 - GET: /login?service={your-service-here}
