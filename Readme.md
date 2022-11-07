@@ -9,6 +9,7 @@ A chula sso [wiki](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_w
 ```
 DEE_APP_SECRET=
 DEE_APP_ID=
+PORT=
 ```
 > DeeAppSecret (default="test") </br>
 > DeeAppId (default="test")

@@ -5,6 +5,7 @@ package di
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
+	"github.com/kelseyhightower/envconfig"
 	"github.com/remove158/chula-sso/cmd/handlers"
 	"github.com/remove158/chula-sso/cmd/routes"
 	"github.com/remove158/chula-sso/internal/services"
@@ -13,15 +14,25 @@ import (
 type Server struct {
 	AuthRoute routes.IAuthRoute
 	Gin       *gin.Engine
+	Config    Setting
+}
+
+type Setting struct {
+	PORT string `envconfig:"PORT" default:"8080"`
 }
 
 func InitializeServer(
 	gin *gin.Engine,
 	authRoute routes.IAuthRoute,
 ) *Server {
+
+	var config Setting
+	envconfig.Process("", &config)
+
 	return &Server{
 		Gin:       gin,
 		AuthRoute: authRoute,
+		Config:    config,
 	}
 }
 

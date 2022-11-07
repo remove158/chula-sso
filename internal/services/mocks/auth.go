@@ -49,15 +49,16 @@ func (mr *MockIAuthServiceMockRecorder) PostLogin(user interface{}) *gomock.Call
 }
 
 // ServiceValidation mocks base method.
-func (m *MockIAuthService) ServiceValidation(ticket string) string {
+func (m *MockIAuthService) ServiceValidation(arg0 models.ServiceValidateRequest) (models.UserResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ServiceValidation", ticket)
-	ret0, _ := ret[0].(string)
-	return ret0
+	ret := m.ctrl.Call(m, "ServiceValidation", arg0)
+	ret0, _ := ret[0].(models.UserResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // ServiceValidation indicates an expected call of ServiceValidation.
-func (mr *MockIAuthServiceMockRecorder) ServiceValidation(ticket interface{}) *gomock.Call {
+func (mr *MockIAuthServiceMockRecorder) ServiceValidation(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ServiceValidation", reflect.TypeOf((*MockIAuthService)(nil).ServiceValidation), ticket)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ServiceValidation", reflect.TypeOf((*MockIAuthService)(nil).ServiceValidation), arg0)
 }
