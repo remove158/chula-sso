@@ -50,7 +50,7 @@ func (h *AuthHandler) PostLogin(ctx *gin.Context) {
 	}
 	user := generateUserResponse(request)
 	ticket := h.authService.PostLogin(user)
-	ctx.Redirect(http.StatusTemporaryRedirect, generatePath(request.Service, ticket))
+	ctx.Redirect(http.StatusFound, generatePath(request.Service, ticket))
 }
 
 func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
