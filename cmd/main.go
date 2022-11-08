@@ -14,6 +14,7 @@ func main() {
 
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
+	config.AllowHeaders = append(config.AllowHeaders, "DeeAppId", "DeeAppSecret", "DeeTicket")
 
 	server.Gin.Use(cors.New(config))
 
