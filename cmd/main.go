@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	cors "github.com/gin-contrib/cors"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/remove158/chula-sso/cmd/di"
 )
@@ -10,6 +11,11 @@ import (
 func main() {
 
 	server := di.InitializeEvent()
+
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+
+	server.Gin.Use(cors.New(config))
 
 	{
 		server.AuthRoute.AddRoute()
