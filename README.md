@@ -1,12 +1,14 @@
 ## Chula SSO
 
-A standalone chula sso based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work)
+A standalone chula-sso-mock based on [chula-sso](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work)
 
 Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
+Please feel free to use with [https://sso.piyaphat.com](https://sso.piyaphat.com)
+
 ## Usage
 
-Docker image is available at [Docker](https://github.com/remove158/chula-sso/pkgs/container/chula-sso)
+Docker images are available on the [GitHub Packages](https://github.com/remove158/chula-sso/pkgs/container/chula-sso).
 
 1. Install docker
 2. Download the image: `docker pull ghcr.io/remove158/chula-sso:latest`
@@ -34,7 +36,7 @@ The configuration is done by the following environment variables. (see [`docker 
 
 ```sh
 curl --request GET \
-  --url 'http://localhost:8080/login?service=https://www.google.com'
+  --url 'https://sso.piyaphat.com/login?service=https://www.google.com'
 ```
 
 - Response 302 Found
@@ -57,10 +59,10 @@ curl --request GET \
 
 ```sh
 curl --request POST \
-  --url 'http://localhost:8080/serviceValidation' \
+  --url 'https://sso.piyaphat.com/serviceValidation' \
   --header 'DeeAppId: test' \
   --header 'DeeAppSecret: test' \
-  --header 'DeeTicket: test'
+  --header 'DeeTicket: 1b50cf0d-ceed-46da-a672-4c61060ece8d'
 ```
 
 - Response 200 (application/json)
