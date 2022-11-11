@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/google/uuid"
 	"github.com/google/wire"
@@ -20,6 +21,7 @@ type AppSecret struct {
 type IAuthService interface {
 	PostLogin(user models.UserResponse) string
 	ServiceValidation(models.ServiceValidateRequest) (models.UserResponse, error)
+	GeneratePath(service string, ticket string) (result string, err error)
 }
 
 type AuthService struct {
@@ -53,4 +55,20 @@ func (h *AuthService) ServiceValidation(request models.ServiceValidateRequest) (
 		return models.UserResponse{}, fmt.Errorf("ticket not found")
 	}
 	return user, nil
+}
+
+func (h *AuthService) GeneratePath(service string, ticket string) (result string, err error) {
+	var u *url.URL
+
+	if u, err = url.Parse(service); err != nil {
+		return
+	}
+
+	values := u.Query()
+	values.Add("ticket", ticket)
+
+	u.RawQuery = values.Encode()
+	result = u.String()
+
+	return
 }
