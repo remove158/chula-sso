@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
@@ -37,6 +38,11 @@ func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 		return
 	}
 
+	if _, err := url.Parse(request.Service); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	ctx.HTML(http.StatusOK, "index.html", gin.H{
 		"service": request.Service,
 	})
@@ -50,7 +56,13 @@ func (h *AuthHandler) PostLogin(ctx *gin.Context) {
 	}
 	user := generateUserResponse(request)
 	ticket := h.authService.PostLogin(user)
-	ctx.Redirect(http.StatusFound, generatePath(request.Service, ticket))
+
+	redirectURL, err := h.authService.GeneratePath(request.Service, ticket)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.Redirect(http.StatusFound, redirectURL)
 }
 
 func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
@@ -70,10 +82,6 @@ func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
 		OUID:        request.UID,
 		Email:       email,
 	}
-}
-
-func generatePath(service string, ticket string) string {
-	return fmt.Sprintf("%s?ticket=%s", service, ticket)
 }
 
 func (h *AuthHandler) ServiceValidation(ctx *gin.Context) {
