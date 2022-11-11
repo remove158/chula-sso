@@ -34,6 +34,21 @@ func (m *MockIAuthService) EXPECT() *MockIAuthServiceMockRecorder {
 	return m.recorder
 }
 
+// GeneratePath mocks base method.
+func (m *MockIAuthService) GeneratePath(service, ticket string) (string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GeneratePath", service, ticket)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GeneratePath indicates an expected call of GeneratePath.
+func (mr *MockIAuthServiceMockRecorder) GeneratePath(service, ticket interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GeneratePath", reflect.TypeOf((*MockIAuthService)(nil).GeneratePath), service, ticket)
+}
+
 // PostLogin mocks base method.
 func (m *MockIAuthService) PostLogin(user models.UserResponse) string {
 	m.ctrl.T.Helper()

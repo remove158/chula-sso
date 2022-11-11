@@ -1,6 +1,7 @@
 package services_test
 
 import (
+	"net/url"
 	"testing"
 
 	"github.com/remove158/chula-sso/cmd/models"
@@ -86,6 +87,48 @@ func (s *AuthServiceTest) TestServiceValidationFailOnTicketInvalid() {
 		DeeAppSecret: "test",
 	}
 	result, err := s.authService.ServiceValidation(request)
+	s.Error(err)
+	s.Empty(result)
+}
+
+func (s *AuthServiceTest) TestGenerateRedirectURLSuccess() {
+	service := "https://www.google.com"
+	ticket := "this-is-a-ticket"
+	result, err := s.authService.GeneratePath(service, ticket)
+	s.NoError(err)
+
+	resultURL, err := url.Parse(result)
+	s.NoError(err)
+	expected, err := url.Parse("https://www.google.com?ticket=this-is-a-ticket")
+	s.NoError(err)
+
+	s.Equal(resultURL.Host, expected.Host)
+	s.Equal(resultURL.Path, expected.Path)
+	s.Equal(resultURL.RawQuery, expected.RawQuery)
+	s.Equal(resultURL.Scheme, expected.Scheme)
+}
+
+func (s *AuthServiceTest) TestGenerateRedirectURLSuccessWithConservedURL() {
+	service := "https://www.google.com/?redirect=%2Fhome&test=1"
+	ticket := "this-is-a-ticket"
+	result, err := s.authService.GeneratePath(service, ticket)
+	s.NoError(err)
+
+	resultURL, err := url.Parse(result)
+	s.NoError(err)
+	expected, err := url.Parse("https://www.google.com/?redirect=%2Fhome&test=1&ticket=this-is-a-ticket")
+	s.NoError(err)
+
+	s.Equal(resultURL.Host, expected.Host)
+	s.Equal(resultURL.Path, expected.Path)
+	s.Equal(resultURL.RawQuery, expected.RawQuery)
+	s.Equal(resultURL.Scheme, expected.Scheme)
+}
+
+func (s *AuthServiceTest) TestGenerateRedirectURLFailWithCantPraseURLService() {
+	service := "postgres://user:abc{DEf1=ghi@example.com:5432/db?sslmode=require"
+	ticket := "this-is-a-ticket"
+	result, err := s.authService.GeneratePath(service, ticket)
 	s.Error(err)
 	s.Empty(result)
 }

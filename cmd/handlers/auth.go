@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
@@ -33,6 +34,11 @@ func (h *AuthHandler) GetLogin(ctx *gin.Context) {
 	var request models.GetLoginRequest
 
 	if err := ctx.ShouldBind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if _, err := url.Parse(request.Service); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
