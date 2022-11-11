@@ -57,18 +57,17 @@ func (h *AuthService) ServiceValidation(request models.ServiceValidateRequest) (
 	return user, nil
 }
 
-func (h *AuthService) GeneratePath(service string, ticket string) (result string, err error) {
-	var u *url.URL
+func (h *AuthService) GeneratePath(service string, ticket string) (string, error) {
+	u, err := url.Parse(service)
 
-	if u, err = url.Parse(service); err != nil {
-		return
+	if err != nil {
+		return "", err
 	}
 
 	values := u.Query()
 	values.Add("ticket", ticket)
 
 	u.RawQuery = values.Encode()
-	result = u.String()
 
-	return
+	return u.String(), nil
 }
