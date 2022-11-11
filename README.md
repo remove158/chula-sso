@@ -4,7 +4,7 @@ A standalone chula-sso-mock based on [chula-sso](https://account.it.chula.ac.th/
 
 Being used in development by [Piyaphat Pinyo](https://www.github.com/remove158)
 
-Please feel free to use with [https://sso.piyaphat.com](https://sso.piyaphat.com/login?service=https://www.google.com)
+Please feel free to use [https://sso.piyaphat.com](https://sso.piyaphat.com/login?service=https://www.google.com)
 
 ## Usage
 
