@@ -69,18 +69,17 @@ curl --request POST \
 
 ```json
 {
-	"uid": "6000000021",
-	"username": "6000000021",
-	"gecos": "admin",
-	"password": "123456",
-	"disable": false,
-	"roles": ["faculty"],
-	"firstname": "Faculty",
-	"lastname": "จุฬา",
-	"firstnameth": "คณะ",
-	"lastnameth": "จุฬา",
-	"ouid": "6000000021",
-	"email": "admin@chula.ac.th"
+	"uid":"6200000001",
+	"username":"Prayut-Chan-Angkhan",
+	"gecos":"Prayut-Chan-Angkhan",
+	"disable":false,
+	"roles":["student"],
+	"firstname":"Prayut",
+	"firstnameth":"Prayut",
+	"lastname":"Chan-Angkhan",
+	"lastnameth":"Chan-Angkhan",
+	"ouid":"6200000001",
+	"email":"6200000001@student.chula.ac.th"
 }
 ```
 
