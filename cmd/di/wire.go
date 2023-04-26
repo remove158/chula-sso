@@ -10,7 +10,6 @@ import (
 	"github.com/remove158/chula-sso/cmd/routes"
 	"github.com/remove158/chula-sso/internal/services"
 )
-
 type Server struct {
 	AuthRoute routes.IAuthRoute
 	Gin       *gin.Engine
@@ -37,6 +36,7 @@ func InitializeServer(
 }
 
 func InitializeGin() *gin.Engine {
+	
 	return gin.Default()
 }
 

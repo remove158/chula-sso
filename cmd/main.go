@@ -6,6 +6,9 @@ import (
 	cors "github.com/gin-contrib/cors"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/remove158/chula-sso/cmd/di"
+	healthcheck "github.com/tavsec/gin-healthcheck"
+	"github.com/tavsec/gin-healthcheck/checks"
+	health_config "github.com/tavsec/gin-healthcheck/config"
 )
 
 func main() {
@@ -15,6 +18,7 @@ func main() {
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
 	config.AllowHeaders = append(config.AllowHeaders, "DeeAppId", "DeeAppSecret", "DeeTicket")
+	healthcheck.New(server.Gin, health_config.DefaultConfig(), []checks.Check{})
 
 	server.Gin.Use(cors.New(config))
 
