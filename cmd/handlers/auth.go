@@ -6,6 +6,7 @@ import (
 	"net/url"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/google/wire"
 	"github.com/remove158/chula-sso/cmd/models"
 	"github.com/remove158/chula-sso/internal/services"
@@ -66,13 +67,14 @@ func (h *AuthHandler) PostLogin(ctx *gin.Context) {
 }
 
 func generateUserResponse(request models.PostLoginRequest) models.UserResponse {
-	username := fmt.Sprintf("%s-%s", request.FirstName, request.LastName)
+	uid := uuid.New().String()
 	email := fmt.Sprintf("%s@student.chula.ac.th", request.UID)
+	gecos := fmt.Sprintf("%s %s, ENG", request.FirstName, request.LastName)
 
 	return models.UserResponse{
-		UID:         request.UID,
-		Username:    username,
-		GECOS:       username,
+		UID:         uid,
+		Username:    request.UID,
+		GECOS:       gecos,
 		Disable:     false,
 		Roles:       []string{request.Roles},
 		FirstName:   request.FirstName,

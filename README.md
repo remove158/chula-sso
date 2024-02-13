@@ -32,30 +32,30 @@ The configuration is done by the following environment variables. (see [`docker 
 
 ### GET /login
 
-- Request
+-   Request
 
 ```sh
 curl --request GET \
   --url 'https://sso.piyaphat.com/login?service=https://www.google.com'
 ```
 
-- Response 302 Found
+-   Response 302 Found
 
 ```js
 // (on-success) 302 Location: https://www.google.com?ticket=86966dc5-2049-428f-88fe-2d78a5985d38
 ```
 
-- Response 400 Bad Request
+-   Response 400 Bad Request
 
 ```json
 {
-	"error": "Key: 'GetLoginRequest.Service' Error:Field validation for 'Service' failed on the 'required' tag"
+    "error": "Key: 'GetLoginRequest.Service' Error:Field validation for 'Service' failed on the 'required' tag"
 }
 ```
 
 ### GET, POST /serviceValidation
 
-- Request
+-   Request
 
 ```sh
 curl --request POST \
@@ -65,29 +65,29 @@ curl --request POST \
   --header 'DeeTicket: 1b50cf0d-ceed-46da-a672-4c61060ece8d'
 ```
 
-- Response 200 (application/json)
+-   Response 200 (application/json)
 
 ```json
 {
-	"uid":"6200000001",
-	"username":"Prayut-Chan-Angkhan",
-	"gecos":"Prayut-Chan-Angkhan",
-	"disable":false,
-	"roles":["student"],
-	"firstname":"Prayut",
-	"firstnameth":"Prayut",
-	"lastname":"Chan-Angkhan",
-	"lastnameth":"Chan-Angkhan",
-	"ouid":"6200000001",
-	"email":"6200000001@student.chula.ac.th"
+    "uid": "14c6c69f-21ca-4999-999c-423dde2515ad",
+    "username": "6200000021",
+    "gecos": "Prayut Chan-Angkhan, ENG",
+    "disable": false,
+    "roles": ["student"],
+    "firstname": "Prayut",
+    "firstnameth": "Prayut",
+    "lastname": "Chan-Angkhan",
+    "lastnameth": "Chan-Angkhan",
+    "ouid": "6200000021",
+    "email": "6200000021@student.chula.ac.th"
 }
 ```
 
-- Response 401 Unauthorized
+-   Response 401 Unauthorized
 
 ```json
 {
-	"error": "ticket not found"
+    "error": "ticket not found"
 }
 ```
 
