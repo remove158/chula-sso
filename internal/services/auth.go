@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/google/uuid"
 	"github.com/google/wire"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/remove158/chula-sso/cmd/models"
@@ -41,7 +40,7 @@ func NewAuthService() *AuthService {
 }
 
 func (h *AuthService) PostLogin(user models.UserResponse) string {
-	ticket := uuid.New().String()
+	ticket := user.UID
 	h.cache[ticket] = user
 	return ticket
 }
